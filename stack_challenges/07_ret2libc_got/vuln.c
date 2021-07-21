@@ -9,6 +9,12 @@
 
 //gcc vuln.c -no-pie -o vuln
 
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+
 int wallet = 0x1337;
 uint32_t item_count = 1;
 bool owns_special = false;

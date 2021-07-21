@@ -4,6 +4,12 @@
 
 //gcc vuln.c -fno-stack-protector -o vuln
 
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+
 int read_flag() {
 	char flag[32] = {0};
 	FILE *fd = NULL;

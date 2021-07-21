@@ -7,6 +7,12 @@
 
 //gcc vuln.c -fno-stack-protector -o vuln
 
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+
 int board[10][10];
 char user_board[10][11];
 int user_score = 0;

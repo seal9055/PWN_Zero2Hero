@@ -2,6 +2,12 @@
 
 // gcc vuln.c -o vuln
 
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+
 void main() {
     char buffer[0x10];
 

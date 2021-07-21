@@ -6,6 +6,12 @@
 
 //gcc vuln.c -fno-stack-protector -no-pie -o vuln
 
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+
 int first = 1;
 int pass;
 

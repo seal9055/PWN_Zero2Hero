@@ -2,6 +2,12 @@
 #include <unistd.h>
 
 // clang vuln.c -o vuln		Gcc kept optimising out defuse_bomb even with -O0 so I used clang for this
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+
 
 void bomb() {
 	puts("We all died");

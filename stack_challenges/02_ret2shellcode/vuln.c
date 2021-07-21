@@ -5,8 +5,13 @@
 
 //gcc vuln.c -fno-stack-protector -no-pie -z execstack -o vuln
 
-#define MAX_USERS 5
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
 
+#define MAX_USERS 5
 struct user {
 	char username[16];
 	char password[16];
@@ -42,7 +47,7 @@ void server() {
 		   	case 1:
 				if (num_users > 5)
 				   	puts("The server is at its user limit.");
-				else
+				else {
 				   	printf("Enter the username:\n > ");
 				   	fgets(User[num_users].username,15,stdin);
 
@@ -51,14 +56,17 @@ void server() {
 
 				   	puts("User successfully created!\n");
 				   	num_users++;
-				   	break;
+				}
+				break;
 
 			case 2:
 				if (num_users == 0)
 					puts("There are no users on this server yet.\n");
 
-				for (int i = 0; i < num_users; i++) {
-					printf("%d: %s",i+1, User[i].username);
+				else {
+					for (int i = 0; i < num_users; i++) {
+						printf("%d: %s",i+1, User[i].username);
+					}
 				}
 				break;
 			case 3:
@@ -66,11 +74,12 @@ void server() {
 					puts("You do not have administrative rights. Please refrain from such actions.\n");
 					break;
 				}
-				else
+				else {
 					printf("The server name is stored at %p\n",server_name);
 					printf("Enter new server name.\n > ");
 					gets(server_name);					
 					break;
+				}
 
 			case 4:
 				puts("Goodbye!");

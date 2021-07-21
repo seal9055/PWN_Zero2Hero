@@ -4,6 +4,12 @@
 
 //gcc vuln.c -fno-stack-protector -z execstack -no-pie -o vuln
 
+__attribute__((constructor)) void ignore_me(){
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+
 void main() {
 
     char building_material[3][10] = { "Wood", "Bricks", "Steel" };
