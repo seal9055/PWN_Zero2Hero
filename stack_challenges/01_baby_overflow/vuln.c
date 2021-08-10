@@ -41,5 +41,5 @@ int main() {
 	  read_flag();
 	}
 	
-	puts("I guess u just were doing good enough.  ¯\\_(ツ)_/¯ ");
+	puts("I guess u just aren't good enough yet. ¯\\_(ツ)_/¯ ");
 }
